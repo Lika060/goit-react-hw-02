@@ -1,4 +1,4 @@
-.buttonsContainer {
+/* .buttonsContainer {
     display: flex;
     padding-top: 30px;
     padding-left: 40px;
@@ -22,4 +22,76 @@
 .feedbackBtn:hover {
     background-color: #f8f1e3;
     transform: scale(1.03);
+} */
+
+/* Загальні стилі для кнопок */
+button {
+    border: 2px solid #ff4d4d;
+    /* Червоний відтінок для обводки */
+    background-color: rgba(255, 255, 255, 0.6);
+    /* Білий фон з прозорістю */
+    color: #0e0101;
+    /* Червоний колір тексту */
+    font-size: 16px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Стилі для кнопок при наведенні */
+button:hover {
+    background-color: rgba(255, 77, 77, 0.8);
+    /* Зміна фону на червоний з прозорістю */
+    color: white;
+    /* Текст стане білим */
+    transform: translateY(-5px);
+    /* Піднімається кнопка */
+    box-shadow: 0 0 10px rgba(255, 77, 77, 0.6), 0 0 20px rgba(255, 77, 77, 0.8);
+    /* Тінь червоного кольору */
+}
+
+/* Ефект при натисканні */
+button:active {
+    transform: translateY(2px);
+    /* Кнопка трохи опускається при натисканні */
+    box-shadow: 0 0 10px #ff4d4d, 0 0 20px #ff4d4d;
+    /* Червона тінь */
+}
+
+/* Анімація для зміни кольору */
+button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background-color: rgba(255, 77, 77, 0.3);
+    /* Прозоре червоне коло */
+    transition: width 0.4s, height 0.4s, top 0.4s, left 0.4s;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+}
+
+button:hover::before {
+    width: 0;
+    height: 0;
+    top: 50%;
+    left: 50%;
+}
+
+/* Позиціонування і анімація кнопок */
+.mt-4 {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+button {
+    z-index: 1;
 }

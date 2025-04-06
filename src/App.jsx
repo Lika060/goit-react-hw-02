@@ -1,42 +1,58 @@
-import Description from './components/Description/Description.jsx';
-import Options from './components/Options/Options.jsx';
-import { useState, useEffect } from 'react';
-import Feedback from './components/Feedback/Feedback.jsx';
-import Notification from './components/Notification/Notification.jsx';
+import { useState, useEffect, } from "react";
+import css from "./App.module.css";
+import Description from "./components/Description/Description.jsx";
+import Feedback from "./components/Feedback/Feedback.jsx";
+import Options from "./components/Options/Options.jsx";
+import Notification from "./components/Notification/Notification.jsx";
 
 const App = () => {
   const [feedback, setFeedback] = useState(() => {
-    const savedFeedback = JSON.parse(window.localStorage.getItem('saved-feedback'));
-    const originalFeedback = { good: 0, neutral: 0, bad: 0 };
-    return savedFeedback !== null ? savedFeedback : originalFeedback;
+    const savedFeedback = localStorage.getItem("feedback");
+    return savedFeedback
+      ? JSON.parse(savedFeedback)
+      : { good: 0, neutral: 0, bad: 0 };
   });
-  const totalFeedback = feedback.good + feedback.neutral + feedback.bad;
-  const positive = totalFeedback > 0 ? Math.round(((feedback.good + feedback.neutral) / totalFeedback) * 100) : 0;
+
   useEffect(() => {
-    window.localStorage.setItem('saved-feedback', JSON.stringify(feedback));
+    localStorage.setItem("feedback", JSON.stringify(feedback));
   }, [feedback]);
+
   const updateFeedback = (feedbackType) => {
     setFeedback((prevFeedback) => ({
       ...prevFeedback,
       [feedbackType]: prevFeedback[feedbackType] + 1,
     }));
   };
-  const handleReset = () => {
+
+  const resetFeedback = () => {
     setFeedback({
-      ...feedback,
       good: 0,
       neutral: 0,
       bad: 0,
     });
+    localStorage.removeItem("feedback");
   };
 
+  const totalFeedback = feedback.good + feedback.neutral + feedback.bad;
+  const positiveFeedback =
+    totalFeedback > 0 ? Math.round((feedback.good / totalFeedback) * 100) : 0;
+
   return (
-    <div>
-      <Options updateFeedback={updateFeedback} total={totalFeedback} reset={handleReset} />
-      {totalFeedback === 0 ? (
-        <Notification />
+    <div className={css.container}>
+      <Description />
+      <Options
+        updateFeedback={updateFeedback}
+        resetFeedback={resetFeedback}
+        totalFeedback={totalFeedback}
+      />
+      {totalFeedback > 0 ? (
+        <Feedback
+          feedback={feedback}
+          totalFeedback={totalFeedback}
+          positiveFeedback={positiveFeedback}
+        />
       ) : (
-        <Feedback feedback={feedback} total={totalFeedback} positive={positive} />
+        <Notification message="No feedback yet" />
       )}
     </div>
   );

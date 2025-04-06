@@ -57,11 +57,11 @@ video {
 }
 
 body {
+  background-color: rgba(126, 35, 4, 0.874);
   background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
     url(./img/hm02.png);
-  /* background-color: rgb(71, 0, 153); */
-  /* background-position: center;
+  background-position: center;
   background-repeat: no-repeat;
-  background-size: cover; */
+  background-size: cover;
 }
 
