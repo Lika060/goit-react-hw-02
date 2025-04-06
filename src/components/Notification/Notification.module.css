@@ -1,13 +1,42 @@
 .message {
-    padding-top: 30px;
-    padding-left: 50px;
-    width: calc(100vw / 2);
-    font-family: 'Dancing Script', cursive;
-    font-optical-sizing: auto;
-    font-size: 24px;
-    color: #ffffff;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(24px, 5vw, 36px);
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, #ff6a00, #e65100);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     text-shadow:
-        2px 2px 2px #000000,
-        2px 2px 20px #ff9a27,
-        2px 2px 15px #f51717;
+        0 0 10px #ff5722,
+        0 0 20px #ff6a00,
+        0 0 30px #e65100,
+        0 0 40px #bf360c;
+    animation: flickerEffect 2s infinite alternate;
+    padding: 20px;
+    margin-top: 20px;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@keyframes flickerEffect {
+
+    0%,
+    100% {
+        text-shadow:
+            0 0 5px #ff5722,
+            0 0 10px #ff6a00,
+            0 0 20px #e65100,
+            0 0 30px #bf360c;
+    }
+
+    50% {
+        text-shadow:
+            0 0 2px #ff6a00,
+            0 0 4px #ff5722,
+            0 0 8px #e65100;
+    }
 }
